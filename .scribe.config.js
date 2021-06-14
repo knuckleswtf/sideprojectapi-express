@@ -157,7 +157,7 @@ module.exports = {
     /*
      * Name for the group of endpoints which do not have a @group set.
      */
-    defaultGroup: 'Endpoints',
+    defaultGroup: 'General',
 
     /*
      * Text to place in the "Introduction" section. Markdown and HTML are supported.

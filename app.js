@@ -17,7 +17,7 @@ require('@knuckleswtf/scribe-express')(app);
  *
  * Otherwise, the request will fail with a 400 error, and a response listing the failed services.
  *
- * @response 400 scenario="Service is unhealthy" {"status": "down", "services": {"database": "up", "redis": "down"}}
+ * @response status=400 scenario="Service is unhealthy" {"status": "down", "services": {"database": "up", "redis": "down"}}
  * @responseField status The status of this API (`up` or `down`).
  * @responseField services Map of each downstream service and their status (`up` or `down`).
  */
@@ -36,9 +36,9 @@ app.get('/api/healthcheck', (req, res) => {
  * Body content array
  *
  * @group Dummy endpoints
- * @bodyParam [].row_id string A unique ID. Example: 700
- * @bodyParam [].name string required An element name. Example: My item name
- * @bodyParam [].description string An optional description of the element.
+ * @bodyParam {string} [].row_id A unique ID. Example: 700
+ * @bodyParam {string} [].name required An element name. Example: My item name
+ * @bodyParam {string} [].description An optional description of the element.
  */
 app.post('/array-body', (req, res) => {
     return res.json({});
@@ -48,7 +48,7 @@ app.post('/array-body', (req, res) => {
  * File input
  *
  * @group Dummy endpoints
- * @bodyParam [] file[] required List of files.
+ * @bodyParam {file[]} [] required List of files.
  */
 app.post('/file-input', (req, res) => {
     return res.json({});

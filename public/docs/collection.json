@@ -12,14 +12,15 @@
         "name": "The SideProjectAPI (Express) Documentation",
         "description": "",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-        "_postman_id": "083a6243-5d7b-4957-bdb7-7c094ebbafe9"
+        "_postman_id": "ddddb8f7-56f1-4dfd-8f51-b9ab328b8198"
     },
     "item": [
         {
-            "name": "Endpoints",
+            "name": "General",
             "description": "",
             "item": [
                 {
+                    "name": "Healthcheck",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -40,14 +41,21 @@
                             }
                         ],
                         "body": null,
-                        "description": null,
+                        "description": "Check that the service is up. If everything is okay, you'll get a 200 OK response.\nOtherwise, the request will fail with a 400 error, and a response listing the failed services.",
                         "auth": {
                             "type": "noauth"
                         }
                     },
                     "response": []
-                },
+                }
+            ]
+        },
+        {
+            "name": "Dummy endpoints",
+            "description": "",
+            "item": [
                 {
+                    "name": "Body content array",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -67,7 +75,10 @@
                                 "value": "application/json"
                             }
                         ],
-                        "body": null,
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{}"
+                        },
                         "description": null,
                         "auth": {
                             "type": "noauth"
@@ -76,6 +87,7 @@
                     "response": []
                 },
                 {
+                    "name": "File input",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -95,7 +107,10 @@
                                 "value": "application/json"
                             }
                         ],
-                        "body": null,
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{}"
+                        },
                         "description": null,
                         "auth": {
                             "type": "noauth"

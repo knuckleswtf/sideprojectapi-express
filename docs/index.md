@@ -31,7 +31,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <script>
     var baseUrl = "http://testapi.com";
 </script>
-<script src="js/tryitout.js"></script>
+<script src="js/tryitout-1.2.1.js"></script>
 
 > Base URL:
 
