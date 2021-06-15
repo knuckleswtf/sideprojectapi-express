@@ -1,15 +1,13 @@
-var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require('@knuckleswtf/scribe-express')();
+var express = require('express');
 var app = express();
-require('@knuckleswtf/scribe-express')(app);
-
-// These routes create a new express.Router() instance 👇
-// var indexRouter = require('./routes/index');
 
 // These routes use the main app instance 👇
+
 /**
  * Healthcheck
  *
@@ -54,15 +52,18 @@ app.post('/file-input', (req, res) => {
     return res.json({});
 });
 
-// var usersRouter = require('./routes/users');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//
-// app.use('/', indexRouter);
+
+// These routes create a new express.Router() instance 👇
+var indexRouter = require('./routes/index');
+app.use('/', indexRouter);
+
+// var usersRouter = require('./routes/users');
 // app.use('/users', usersRouter);
 
 module.exports = app;
