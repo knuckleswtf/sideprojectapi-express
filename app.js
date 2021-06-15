@@ -60,10 +60,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // These routes create a new express.Router() instance 👇
+
 var indexRouter = require('./routes/index');
 app.use('/', indexRouter);
 
-// var usersRouter = require('./routes/users');
-// app.use('/users', usersRouter);
+
+// These routes create a new express instance 👇
+
+var usersRouter = require('./routes/users');
+app.use('/users', usersRouter);
 
 module.exports = app;
