@@ -6,12 +6,18 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@knuckleswtf/scribe-express": "../../scribe-js/frameworks/express",
     "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "morgan": "~1.9.1"
+    "express-async-handler": "^1.1.4",
+    "faker": "^5.5.3",
+    "morgan": "~1.9.1",
+    "sequelize": "^6.6.2",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
-    "@knuckleswtf/scribe-express": "../../scribe-js/frameworks/express"
+    "node-ray": "^1.16.0"
   }
 }

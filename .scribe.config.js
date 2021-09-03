@@ -2,7 +2,7 @@ module.exports = {
     /*
      * The base URL to be used in examples.
      */
-    baseUrl: "http://testapi.com",
+    baseUrl: "http://localhost:3000",
 
     /*
      * The HTML <title> for the generated documentation, and the name of the generated Postman collection and OpenAPI spec.
@@ -36,7 +36,7 @@ module.exports = {
         /*
          * Set this to true if any endpoints in your API uses authentication.
          */
-        enabled: false,
+        enabled: true,
         /*
          * Set this to true if your API should be authenticated by default.
          * You can then use @unauthenticated or @authenticated on individual endpoints to change their status.
@@ -56,6 +56,11 @@ module.exports = {
          * If this value is null, Scribe will use a random value. If you don't have authenticated endpoints, don't worry about this.
          */
         useValue: () => process.env.SCRIBE_AUTH_KEY,
+        /*
+         * Placeholder your users will see for the auth parameter in the example requests.
+         * Set this to null if you want Scribe to use a random value as placeholder instead.
+         */
+        placeholder: '{BEARER_TOKEN}',
         /*
          * Any extra authentication-related info for your users. For instance, you can describe how to find or generate their auth credentials.
          * Markdown and HTML are supported.
@@ -138,7 +143,7 @@ module.exports = {
      * Specification schema: https://swagger.io/specification/
      */
     openapi: {
-        enabled: false,
+        enabled: true,
         // Override specific fields in the generated spec. Lodash set() notation is supported.
         overrides: {
             // 'info.version': '2.0.0',

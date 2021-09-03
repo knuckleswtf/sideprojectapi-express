@@ -8,7 +8,6 @@ var app = require('../app');
 var debug = require('debug')('sideprojectapi-express:server');
 var http = require('http');
 
-console.log("STARTT");
 /**
  * Get port from environment and store in Express.
  */
