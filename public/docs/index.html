@@ -1,0 +1,2358 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>The SideProjectAPI (Express) Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="css/theme-default.print.css" media="print">
+    <script src="js/theme-default-1.8.1.js"></script>
+
+    <link rel="stylesheet"
+          href="//unpkg.com/@highlightjs/cdn-assets@10.7.2/styles/obsidian.min.css">
+    <script src="//unpkg.com/@highlightjs/cdn-assets@10.7.2/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+    <script>
+    var baseUrl = "http://localhost:3000";
+    </script>
+    <script src="js/tryitout-1.8.1.js"></script>
+    
+</head>
+
+<body data-languages="[&#34;javascript&#34;,&#34;bash&#34;]">
+<a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="navbar-image" />
+      </span>
+</a>
+<div class="tocify-wrapper">
+    
+    
+        <div class="lang-selector">
+            
+                <a href="#" data-language-name="javascript">javascript</a>
+            
+                <a href="#" data-language-name="bash">bash</a>
+            
+        </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+    <ul class="search-results"></ul>
+
+    <ul id="toc">
+    </ul>
+
+    
+        <ul class="toc-footer" id="toc-footer">
+            
+                <li><a href="collection.json">View Postman collection</a></li>
+            
+                <li><a href="openapi.yaml">View OpenAPI spec</a></li>
+            
+                <li><a href="http://github.com/knuckleswtf/scribe-js">Documentation powered by Scribe ✍</a></li>
+            
+        </ul>
+    
+        <ul class="toc-footer" id="last-updated">
+            <li>Last updated: September 3, 2021</li>
+        </ul>
+</div>
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<blockquote>
+  <p>Base URL:</p>
+</blockquote>
+<pre><code class="yaml language-yaml">http://localhost:3000
+</code></pre>
+
+        <h1 id="authenticatingrequests">Authenticating requests</h1>
+<p>This API is authenticated by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {BEARER_TOKEN}"</code></strong>.</p>
+<p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
+<p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p>
+
+        
+    <h1 id="General">General</h1>
+    <p>
+        
+    </p>
+
+    
+        
+<h2 id="General-GET-api-healthcheck-unnecessaryParam-">Healthcheck</h2>
+
+<p>
+
+</p>
+
+<p>Check that the service is up. If everything is okay, you'll get a 200 OK response.</p>
+<p>Otherwise, the request will fail with a 400 error, and a response listing the failed services.</p>
+
+<span id="example-requests-GET-api-healthcheck--unnecessaryParam-">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/api/healthcheck/"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request GET \
+    --get "http://localhost:3000/api/healthcheck/"  \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-GET-api-healthcheck--unnecessaryParam-">
+
+
+<blockquote>Example response (200):</blockquote>
+
+
+<details class="annotation">
+    <summary>
+        <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+    </summary>
+    <pre><code class="language-http">
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8 </code></pre>
+</details> 
+
+<pre>
+ 
+<!-- If response is a JSON string, prettify it. Otherwise, just print it -->
+<code class="language-json">{
+    "status": "up",
+    "services": {
+        "database": "up",
+        "redis": "up"
+    }
+}</code>
+ </pre>
+
+<blockquote>Example response (400, Service is unhealthy):</blockquote>
+
+
+
+<pre>
+ 
+<!-- If response is a JSON string, prettify it. Otherwise, just print it -->
+<code class="language-json">{
+    "status": "down",
+    "services": {
+        "database": "up",
+        "redis": "down"
+    }
+}</code>
+ </pre>
+
+
+</span>
+<span id="execution-results-GET-api-healthcheck--unnecessaryParam-" hidden>
+    <blockquote>Received response<span id="execution-response-status-GET-api-healthcheck--unnecessaryParam-"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GET-api-healthcheck--unnecessaryParam-"></code></pre>
+</span>
+<span id="execution-error-GET-api-healthcheck--unnecessaryParam-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GET-api-healthcheck--unnecessaryParam-"></code></pre>
+</span>
+
+<form id="form-GET-api-healthcheck--unnecessaryParam-"
+      data-method="GET"
+      data-path="/api/healthcheck/:unnecessaryParam?"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Accept&#34;:&#34;application/json&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GET-api-healthcheck--unnecessaryParam-', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-GET-api-healthcheck--unnecessaryParam-"
+            onclick="tryItOut('GET-api-healthcheck--unnecessaryParam-');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-GET-api-healthcheck--unnecessaryParam-"
+            onclick="cancelTryOut('GET-api-healthcheck--unnecessaryParam-');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-GET-api-healthcheck--unnecessaryParam-" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-green">GET</small>
+
+
+    <b><code>/api/healthcheck/:unnecessaryParam?</code></b>
+</p>
+
+
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+
+
+<p>
+<b><code>unnecessaryParam</code></b>&nbsp;&nbsp;<small>string</small>
+
+<i>optional</i>
+
+
+    
+        <input type="text"
+               name="unnecessaryParam"
+               data-endpoint="GET-api-healthcheck--unnecessaryParam-"
+               data-component="url" hidden>
+    
+
+<br>
+
+</p>
+
+
+
+
+</form>
+
+
+<h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+
+
+<p>
+<b><code>status</code></b>&nbsp;&nbsp;
+
+
+
+
+<br>
+<p>The status of this API (<code>up</code> or <code>down</code>).</p>
+</p>
+
+
+<p>
+<b><code>services</code></b>&nbsp;&nbsp;
+
+
+
+
+<br>
+<p>Map of each downstream service and their status (<code>up</code> or <code>down</code>).</p>
+</p>
+
+
+
+    
+
+    <h1 id="Dummy-endpoints">Dummy endpoints</h1>
+    <p>
+        
+    </p>
+
+    
+        
+<h2 id="Dummy-endpoints-POST-nested">Nested fields</h2>
+
+<p>
+
+</p>
+
+
+
+<span id="example-requests-POST-nested">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/nested"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+const body = {
+    "data": {
+        "name": "ut",
+        "size": 5,
+        "things": {
+            "0": "exercitationem",
+            "1": "quia"
+        },
+        "objects": {
+            "0": {
+                "a": "dolorem",
+                "b": "tempore"
+            },
+            "1": {
+                "a": "dolorem",
+                "b": "tempore"
+            }
+        }
+    }
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(body),
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request POST \
+    "http://localhost:3000/nested"  \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data '{
+    "data": {
+        "name": "ut",
+        "size": 5,
+        "things": {
+            "0": "exercitationem",
+            "1": "quia"
+        },
+        "objects": {
+            "0": {
+                "a": "dolorem",
+                "b": "tempore"
+            },
+            "1": {
+                "a": "dolorem",
+                "b": "tempore"
+            }
+        }
+    }
+}'
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-POST-nested">
+
+</span>
+<span id="execution-results-POST-nested" hidden>
+    <blockquote>Received response<span id="execution-response-status-POST-nested"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POST-nested"></code></pre>
+</span>
+<span id="execution-error-POST-nested" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POST-nested"></code></pre>
+</span>
+
+<form id="form-POST-nested"
+      data-method="POST"
+      data-path="/nested"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Accept&#34;:&#34;application/json&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POST-nested', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-POST-nested"
+            onclick="tryItOut('POST-nested');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-POST-nested"
+            onclick="cancelTryOut('POST-nested');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-POST-nested" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-black">POST</small>
+
+
+    <b><code>/nested</code></b>
+</p>
+
+
+
+
+
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+
+    
+    
+            <p>
+            <details>
+                <summary style="padding-bottom: 10px;">
+                    <b><code>data</code></b>&nbsp;&nbsp;<small>object</small>
+
+
+
+
+<br>
+<p>The data</p>
+                </summary>
+
+                
+                    
+                    
+                        <p>
+                            <b><code>data.name</code></b>&nbsp;&nbsp;<small>string</small>
+
+
+
+
+    
+        <input type="text"
+               name="data.name"
+               data-endpoint="POST-nested"
+               data-component="body" required hidden>
+    
+
+<br>
+<p>A string field.</p>
+                        </p>
+                    
+                
+                    
+                    
+                        <p>
+                            <b><code>data.size</code></b>&nbsp;&nbsp;<small>integer</small>
+
+<i>optional</i>
+
+
+    
+        <input type="number"
+               name="data.size"
+               data-endpoint="POST-nested"
+               data-component="body" hidden>
+    
+
+<br>
+<p>A number.</p>
+                        </p>
+                    
+                
+                    
+                    
+                        <p>
+                            <b><code>data.things</code></b>&nbsp;&nbsp;<small>string[]</small>
+
+<i>optional</i>
+
+
+    
+        <input type="text"
+               name="data.things.0"
+               data-endpoint="POST-nested"
+               data-component="body" hidden>
+        <input type="text"
+               name="data.things.1"
+               data-endpoint="POST-nested"
+               data-component="body" hidden>
+    
+
+<br>
+<p>An array of strings</p>
+                        </p>
+                    
+                
+                    
+                    
+                        
+    
+    
+            <p>
+            <details>
+                <summary style="padding-bottom: 10px;">
+                    <b><code>data.objects</code></b>&nbsp;&nbsp;<small>object[]</small>
+
+<i>optional</i>
+
+
+<br>
+<p>An array of objects</p>
+                </summary>
+
+                
+                    
+                    
+                        <p>
+                            <b><code>data.objects[].a</code></b>&nbsp;&nbsp;<small>string</small>
+
+<i>optional</i>
+
+
+    
+        <input type="text"
+               name="data.objects.0.a"
+               data-endpoint="POST-nested"
+               data-component="body" hidden>
+    
+
+<br>
+<p>A field in the array of objects</p>
+                        </p>
+                    
+                
+                    
+                    
+                        <p>
+                            <b><code>data.objects[].b</code></b>&nbsp;&nbsp;<small>string</small>
+
+<i>optional</i>
+
+
+    
+        <input type="text"
+               name="data.objects.0.b"
+               data-endpoint="POST-nested"
+               data-component="body" hidden>
+    
+
+<br>
+<p>A field in the array of objects</p>
+                        </p>
+                    
+                
+            </details>
+            </p>
+        
+
+                    
+                
+            </details>
+            </p>
+        
+
+
+</form>
+
+
+
+    
+        
+<h2 id="Dummy-endpoints-POST-array-body">Body content array</h2>
+
+<p>
+
+</p>
+
+
+
+<span id="example-requests-POST-array-body">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/array-body"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+const body = {
+    "0": {
+        "row_id": "700",
+        "name": "My item name"
+    },
+    "1": {
+        "row_id": "700",
+        "name": "My item name"
+    }
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(body),
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request POST \
+    "http://localhost:3000/array-body"  \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data '{
+    "0": {
+        "row_id": "700",
+        "name": "My item name"
+    },
+    "1": {
+        "row_id": "700",
+        "name": "My item name"
+    }
+}'
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-POST-array-body">
+
+</span>
+<span id="execution-results-POST-array-body" hidden>
+    <blockquote>Received response<span id="execution-response-status-POST-array-body"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POST-array-body"></code></pre>
+</span>
+<span id="execution-error-POST-array-body" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POST-array-body"></code></pre>
+</span>
+
+<form id="form-POST-array-body"
+      data-method="POST"
+      data-path="/array-body"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="1"
+      data-headers='{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Accept&#34;:&#34;application/json&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POST-array-body', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-POST-array-body"
+            onclick="tryItOut('POST-array-body');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-POST-array-body"
+            onclick="cancelTryOut('POST-array-body');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-POST-array-body" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-black">POST</small>
+
+
+    <b><code>/array-body</code></b>
+</p>
+
+
+
+
+
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+
+    
+    
+        
+        <p>
+            <p>The request body is an array (<code>object[]</code>), representing list of items.</p>
+        </p>
+        
+                
+                
+        <p>
+            <b><code>[].row_id</code></b>&nbsp;&nbsp;<small>string</small>
+
+<i>optional</i>
+
+
+    
+        <input type="text"
+               name="0.row_id"
+               data-endpoint="POST-array-body"
+               data-component="body" hidden>
+    
+
+<br>
+<p>A unique ID.</p>
+        </p>
+        
+        
+                
+                
+        <p>
+            <b><code>[].name</code></b>&nbsp;&nbsp;<small>string</small>
+
+
+
+
+    
+        <input type="text"
+               name="0.name"
+               data-endpoint="POST-array-body"
+               data-component="body" required hidden>
+    
+
+<br>
+<p>An element name.</p>
+        </p>
+        
+        
+        
+
+
+</form>
+
+
+
+    
+        
+<h2 id="Dummy-endpoints-POST-file-input">File input</h2>
+
+<p>
+
+</p>
+
+
+
+<span id="example-requests-POST-file-input">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/file-input"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+const body = new FormData();
+body.append('nested[_string]', 'maxime');
+body.append('the_file', document.querySelector('input[name="the_file"]').files[0]);
+body.append('nested[_file]', document.querySelector('input[name="nested[_file]"]').files[0]);
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request POST \
+    "http://localhost:3000/file-input"  \
+    --header "Content-Type: multipart/form-data" \
+    --header "Accept: application/json" \
+    --form "nested[_string]=maxime" \
+    --form "the_file=@C:\Users\shalvah\AppData\Local\Temp\tmp-9876-zaYF0dJvneak" \
+    --form "nested[_file]=@C:\Users\shalvah\AppData\Local\Temp\tmp-9876-cTiplaU9fgam"
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-POST-file-input">
+
+</span>
+<span id="execution-results-POST-file-input" hidden>
+    <blockquote>Received response<span id="execution-response-status-POST-file-input"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POST-file-input"></code></pre>
+</span>
+<span id="execution-error-POST-file-input" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POST-file-input"></code></pre>
+</span>
+
+<form id="form-POST-file-input"
+      data-method="POST"
+      data-path="/file-input"
+      data-authed="0"
+      data-hasfiles="1"
+      data-isarraybody="0"
+      data-headers='{&#34;Content-Type&#34;:&#34;multipart/form-data&#34;,&#34;Accept&#34;:&#34;application/json&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POST-file-input', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-POST-file-input"
+            onclick="tryItOut('POST-file-input');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-POST-file-input"
+            onclick="cancelTryOut('POST-file-input');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-POST-file-input" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-black">POST</small>
+
+
+    <b><code>/file-input</code></b>
+</p>
+
+
+
+
+
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+
+    
+    
+            <p>
+                <b><code>the_file</code></b>&nbsp;&nbsp;<small>file</small>
+
+
+
+
+    
+        <input type="file"
+               name="the_file"
+               data-endpoint="POST-file-input"
+               data-component="body" required hidden>
+    
+
+<br>
+<p>Just a file.</p>
+            </p>
+        
+
+    
+    
+            <p>
+            <details>
+                <summary style="padding-bottom: 10px;">
+                    <b><code>nested</code></b>&nbsp;&nbsp;<small>object</small>
+
+
+
+
+<br>
+
+                </summary>
+
+                
+                    
+                    
+                        <p>
+                            <b><code>nested._string</code></b>&nbsp;&nbsp;<small>string</small>
+
+
+
+
+    
+        <input type="text"
+               name="nested._string"
+               data-endpoint="POST-file-input"
+               data-component="body" required hidden>
+    
+
+<br>
+<p>A nested string.</p>
+                        </p>
+                    
+                
+                    
+                    
+                        <p>
+                            <b><code>nested._file</code></b>&nbsp;&nbsp;<small>file</small>
+
+
+
+
+    
+        <input type="file"
+               name="nested._file"
+               data-endpoint="POST-file-input"
+               data-component="body" required hidden>
+    
+
+<br>
+<p>A nested file.</p>
+                        </p>
+                    
+                
+            </details>
+            </p>
+        
+
+
+</form>
+
+
+
+    
+
+    <h1 id="Side-Projects">Side Projects</h1>
+    <p>
+        
+    </p>
+
+    
+        
+<h2 id="Side-Projects-GET-sideProjects">View all side projects</h2>
+
+<p>
+
+</p>
+
+<p>This endpoint's response was gotten via a "response call"—
+Scribe <strong>called our API</strong> in a test environment to get a sample response.</p>
+
+<span id="example-requests-GET-sideProjects">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/sideProjects"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request GET \
+    --get "http://localhost:3000/sideProjects"  \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-GET-sideProjects">
+
+
+<blockquote>Example response (200):</blockquote>
+
+
+<details class="annotation">
+    <summary>
+        <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+    </summary>
+    <pre><code class="language-http">
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8 </code></pre>
+</details> 
+
+<pre>
+ 
+<!-- If response is a JSON string, prettify it. Otherwise, just print it -->
+<code class="language-json">[
+    {
+        "id": 1,
+        "name": "Product Group Developer",
+        "description": "Ea ea earum aspernatur recusandae eum ut et.",
+        "url": null,
+        "dueAt": "2021-06-19T07:02:53.289Z",
+        "createdAt": "2021-06-18T16:35:57.575Z",
+        "updatedAt": "2021-06-18T16:35:57.575Z",
+        "UserId": 1
+    }
+]</code>
+ </pre>
+
+
+</span>
+<span id="execution-results-GET-sideProjects" hidden>
+    <blockquote>Received response<span id="execution-response-status-GET-sideProjects"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GET-sideProjects"></code></pre>
+</span>
+<span id="execution-error-GET-sideProjects" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GET-sideProjects"></code></pre>
+</span>
+
+<form id="form-GET-sideProjects"
+      data-method="GET"
+      data-path="/sideProjects"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Accept&#34;:&#34;application/json&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GET-sideProjects', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-GET-sideProjects"
+            onclick="tryItOut('GET-sideProjects');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-GET-sideProjects"
+            onclick="cancelTryOut('GET-sideProjects');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-GET-sideProjects" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-green">GET</small>
+
+
+    <b><code>/sideProjects</code></b>
+</p>
+
+
+
+
+
+</form>
+
+
+
+    
+        
+<h2 id="Side-Projects-POST-sideProjects-id">Start a new side project</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+
+</p>
+
+<p><em>Even though we both know you'll never finish it.</em></p>
+<p>This endpoint's body parameters were automatically generated by Scribe
+from the controller's code. Check out the source! </aside></p>
+
+<span id="example-requests-POST-sideProjects--id">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/sideProjects/057"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {BEARER_TOKEN}",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request POST \
+    "http://localhost:3000/sideProjects/057"  \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --header "Authorization: Bearer {BEARER_TOKEN}"
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-POST-sideProjects--id">
+
+</span>
+<span id="execution-results-POST-sideProjects--id" hidden>
+    <blockquote>Received response<span id="execution-response-status-POST-sideProjects--id"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POST-sideProjects--id"></code></pre>
+</span>
+<span id="execution-error-POST-sideProjects--id" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POST-sideProjects--id"></code></pre>
+</span>
+
+<form id="form-POST-sideProjects--id"
+      data-method="POST"
+      data-path="/sideProjects/:id"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Accept&#34;:&#34;application/json&#34;,&#34;Authorization&#34;:&#34;Bearer {BEARER_TOKEN}&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POST-sideProjects--id', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-POST-sideProjects--id"
+            onclick="tryItOut('POST-sideProjects--id');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-POST-sideProjects--id"
+            onclick="cancelTryOut('POST-sideProjects--id');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-POST-sideProjects--id" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-black">POST</small>
+
+
+    <b><code>/sideProjects/:id</code></b>
+</p>
+
+
+<p>
+    <label id="auth-POST-sideProjects--id" hidden>Authorization header:
+        <b><code>Bearer </code></b><input type="text"
+                                                               name="Authorization"
+                                                               data-prefix="Bearer "
+                                                               data-endpoint="POST-sideProjects--id"
+                                                               data-component="header"></label>
+</p>
+
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+
+
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>string</small>
+
+
+
+
+    
+        <input type="text"
+               name="id"
+               data-endpoint="POST-sideProjects--id"
+               data-component="url" required hidden>
+    
+
+<br>
+<p>The ID of the side project.</p>
+</p>
+
+
+
+
+</form>
+
+
+
+    
+        
+<h2 id="Side-Projects-POST-sideProjects-id">Finish a side project</h2>
+
+<p>
+
+</p>
+
+<p>Hmmm.🤔</p>
+
+<span id="example-requests-POST-sideProjects--id">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/sideProjects/2"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request POST \
+    "http://localhost:3000/sideProjects/2"  \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-POST-sideProjects--id">
+
+</span>
+<span id="execution-results-POST-sideProjects--id" hidden>
+    <blockquote>Received response<span id="execution-response-status-POST-sideProjects--id"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POST-sideProjects--id"></code></pre>
+</span>
+<span id="execution-error-POST-sideProjects--id" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POST-sideProjects--id"></code></pre>
+</span>
+
+<form id="form-POST-sideProjects--id"
+      data-method="POST"
+      data-path="/sideProjects/:id"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Accept&#34;:&#34;application/json&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POST-sideProjects--id', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-POST-sideProjects--id"
+            onclick="tryItOut('POST-sideProjects--id');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-POST-sideProjects--id"
+            onclick="cancelTryOut('POST-sideProjects--id');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-POST-sideProjects--id" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-black">POST</small>
+
+
+    <b><code>/sideProjects/:id</code></b>
+</p>
+
+
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+
+
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>
+
+
+
+
+    
+        <input type="number"
+               name="id"
+               data-endpoint="POST-sideProjects--id"
+               data-component="url" required hidden>
+    
+
+<br>
+<p>The ID of the side project.</p>
+</p>
+
+
+
+
+</form>
+
+
+
+    
+        
+<h2 id="Side-Projects-POST-sideProjects-id">Update a side project</h2>
+
+<p>
+
+</p>
+
+
+
+<span id="example-requests-POST-sideProjects--id">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/sideProjects/95"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request POST \
+    "http://localhost:3000/sideProjects/95"  \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-POST-sideProjects--id">
+
+</span>
+<span id="execution-results-POST-sideProjects--id" hidden>
+    <blockquote>Received response<span id="execution-response-status-POST-sideProjects--id"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POST-sideProjects--id"></code></pre>
+</span>
+<span id="execution-error-POST-sideProjects--id" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POST-sideProjects--id"></code></pre>
+</span>
+
+<form id="form-POST-sideProjects--id"
+      data-method="POST"
+      data-path="/sideProjects/:id"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Accept&#34;:&#34;application/json&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POST-sideProjects--id', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-POST-sideProjects--id"
+            onclick="tryItOut('POST-sideProjects--id');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-POST-sideProjects--id"
+            onclick="cancelTryOut('POST-sideProjects--id');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-POST-sideProjects--id" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-black">POST</small>
+
+
+    <b><code>/sideProjects/:id</code></b>
+</p>
+
+
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+
+
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>
+
+
+
+
+    
+        <input type="number"
+               name="id"
+               data-endpoint="POST-sideProjects--id"
+               data-component="url" required hidden>
+    
+
+<br>
+<p>The ID of the side project.</p>
+</p>
+
+
+
+
+</form>
+
+
+
+    
+        
+<h2 id="Side-Projects-GET-sideProjects-id">View a side project</h2>
+
+<p>
+
+</p>
+
+<p>The 404 sample is gotten from a "response file".</p>
+<aside class="success">Also, pretty cool: this endpoint's (and some others) URL parameters were figured out entirely by Scribe!</aside>
+
+<span id="example-requests-GET-sideProjects--id">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/sideProjects/786"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request GET \
+    --get "http://localhost:3000/sideProjects/786"  \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-GET-sideProjects--id">
+
+
+<blockquote>Example response (200):</blockquote>
+
+
+<details class="annotation">
+    <summary>
+        <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+    </summary>
+    <pre><code class="language-http">
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8 </code></pre>
+</details> 
+
+<pre>
+ 
+<!-- If response is a JSON string, prettify it. Otherwise, just print it -->
+<code class="language-json">{
+    "id": 1,
+    "name": "Product Group Developer",
+    "description": "Ea ea earum aspernatur recusandae eum ut et.",
+    "url": null,
+    "dueAt": "2021-06-19T07:02:53.289Z",
+    "createdAt": "2021-06-18T16:35:57.575Z",
+    "updatedAt": "2021-06-18T16:35:57.575Z",
+    "UserId": 1,
+    "User": {
+        "id": 1,
+        "name": "Jessie Medhurst",
+        "email": "Johnathan_Purdy36@gmail.com",
+        "emailVerifiedAt": "2021-06-18T16:35:57.558Z",
+        "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+        "createdAt": "2021-06-18T16:35:57.560Z",
+        "updatedAt": "2021-06-18T16:35:57.560Z"
+    }
+}</code>
+ </pre>
+
+<blockquote>Example response (404, Side project not found):</blockquote>
+
+
+
+<pre>
+ 
+<!-- If response is a JSON string, prettify it. Otherwise, just print it -->
+<code class="language-json">{
+    "message": "Not found",
+    "resource": "Side project"
+}</code>
+ </pre>
+
+
+</span>
+<span id="execution-results-GET-sideProjects--id" hidden>
+    <blockquote>Received response<span id="execution-response-status-GET-sideProjects--id"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GET-sideProjects--id"></code></pre>
+</span>
+<span id="execution-error-GET-sideProjects--id" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GET-sideProjects--id"></code></pre>
+</span>
+
+<form id="form-GET-sideProjects--id"
+      data-method="GET"
+      data-path="/sideProjects/:id"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Accept&#34;:&#34;application/json&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GET-sideProjects--id', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-GET-sideProjects--id"
+            onclick="tryItOut('GET-sideProjects--id');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-GET-sideProjects--id"
+            onclick="cancelTryOut('GET-sideProjects--id');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-GET-sideProjects--id" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-green">GET</small>
+
+
+    <b><code>/sideProjects/:id</code></b>
+</p>
+
+
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+
+
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>
+
+
+
+
+    
+        <input type="number"
+               name="id"
+               data-endpoint="GET-sideProjects--id"
+               data-component="url" required hidden>
+    
+
+<br>
+<p>The ID of the side project.</p>
+</p>
+
+
+
+
+</form>
+
+
+
+    
+        
+<h2 id="Side-Projects-DELETE-sideProjects-id">Delete a side project</h2>
+
+<p>
+
+</p>
+
+
+
+<span id="example-requests-DELETE-sideProjects--id">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/sideProjects/232"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request DELETE \
+    "http://localhost:3000/sideProjects/232"  \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-DELETE-sideProjects--id">
+
+
+<blockquote>Example response (204, Nothing to see here):</blockquote>
+
+
+
+<pre>
+
+<code>[Empty response]</code>
+ </pre>
+
+
+</span>
+<span id="execution-results-DELETE-sideProjects--id" hidden>
+    <blockquote>Received response<span id="execution-response-status-DELETE-sideProjects--id"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-DELETE-sideProjects--id"></code></pre>
+</span>
+<span id="execution-error-DELETE-sideProjects--id" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETE-sideProjects--id"></code></pre>
+</span>
+
+<form id="form-DELETE-sideProjects--id"
+      data-method="DELETE"
+      data-path="/sideProjects/:id"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Accept&#34;:&#34;application/json&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETE-sideProjects--id', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-DELETE-sideProjects--id"
+            onclick="tryItOut('DELETE-sideProjects--id');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-DELETE-sideProjects--id"
+            onclick="cancelTryOut('DELETE-sideProjects--id');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-DELETE-sideProjects--id" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-red">DELETE</small>
+
+
+    <b><code>/sideProjects/:id</code></b>
+</p>
+
+
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+
+
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>
+
+
+
+
+    
+        <input type="number"
+               name="id"
+               data-endpoint="DELETE-sideProjects--id"
+               data-component="url" required hidden>
+    
+
+<br>
+<p>The ID of the side project.</p>
+</p>
+
+
+
+
+</form>
+
+
+
+    
+
+    <h1 id="Users">Users</h1>
+    <p>
+        
+    </p>
+
+    
+        
+<h2 id="Users-GET-users">View all users</h2>
+
+<p>
+
+</p>
+
+<p>[TODO] This endpoint uses a custom Scribe strategy that parses a
+<code>@usesPagination</code> annotation to add some query parameters.</p>
+<p>The sample response is gotten by Scribe making a test API call (aka "response call").</p>
+
+<span id="example-requests-GET-users">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/users"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request GET \
+    --get "http://localhost:3000/users"  \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-GET-users">
+
+
+<blockquote>Example response (200):</blockquote>
+
+
+<details class="annotation">
+    <summary>
+        <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+    </summary>
+    <pre><code class="language-http">
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8 </code></pre>
+</details> 
+
+<pre>
+ 
+<!-- If response is a JSON string, prettify it. Otherwise, just print it -->
+<code class="language-json">{
+    "data": [
+        {
+            "id": 1,
+            "name": "Jessie Medhurst",
+            "email": "Johnathan_Purdy36@gmail.com",
+            "emailVerifiedAt": "2021-06-18T16:35:57.558Z",
+            "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+            "createdAt": "2021-06-18T16:35:57.560Z",
+            "updatedAt": "2021-06-18T16:35:57.560Z"
+        }
+    ]
+}</code>
+ </pre>
+
+
+</span>
+<span id="execution-results-GET-users" hidden>
+    <blockquote>Received response<span id="execution-response-status-GET-users"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GET-users"></code></pre>
+</span>
+<span id="execution-error-GET-users" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GET-users"></code></pre>
+</span>
+
+<form id="form-GET-users"
+      data-method="GET"
+      data-path="/users"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Accept&#34;:&#34;application/json&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GET-users', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-GET-users"
+            onclick="tryItOut('GET-users');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-GET-users"
+            onclick="cancelTryOut('GET-users');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-GET-users" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-green">GET</small>
+
+
+    <b><code>/users</code></b>
+</p>
+
+
+
+
+
+</form>
+
+
+
+    
+        
+<h2 id="Users-GET-users-id">Fetch a user</h2>
+
+<p>
+
+</p>
+
+<p>The 404 sample is gotten from a "response file".</p>
+
+<span id="example-requests-GET-users--id">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/users/22"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request GET \
+    --get "http://localhost:3000/users/22"  \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-GET-users--id">
+
+
+<blockquote>Example response (200):</blockquote>
+
+
+<details class="annotation">
+    <summary>
+        <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+    </summary>
+    <pre><code class="language-http">
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8 </code></pre>
+</details> 
+
+<pre>
+ 
+<!-- If response is a JSON string, prettify it. Otherwise, just print it -->
+<code class="language-json">{
+    "dara": {
+        "id": 1,
+        "name": "Jessie Medhurst",
+        "email": "Johnathan_Purdy36@gmail.com",
+        "emailVerifiedAt": "2021-06-18T16:35:57.558Z",
+        "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+        "createdAt": "2021-06-18T16:35:57.560Z",
+        "updatedAt": "2021-06-18T16:35:57.560Z",
+        "SideProjects": [
+            {
+                "id": 1,
+                "name": "Product Group Developer",
+                "description": "Ea ea earum aspernatur recusandae eum ut et.",
+                "url": null,
+                "dueAt": "2021-06-19T07:02:53.289Z",
+                "createdAt": "2021-06-18T16:35:57.575Z",
+                "updatedAt": "2021-06-18T16:35:57.575Z",
+                "UserId": 1
+            }
+        ]
+    }
+}</code>
+ </pre>
+
+<blockquote>Example response (404, User not found):</blockquote>
+
+
+
+<pre>
+ 
+<!-- If response is a JSON string, prettify it. Otherwise, just print it -->
+<code class="language-json">{
+    "message": "Not found",
+    "resource": "user"
+}</code>
+ </pre>
+
+
+</span>
+<span id="execution-results-GET-users--id" hidden>
+    <blockquote>Received response<span id="execution-response-status-GET-users--id"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GET-users--id"></code></pre>
+</span>
+<span id="execution-error-GET-users--id" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GET-users--id"></code></pre>
+</span>
+
+<form id="form-GET-users--id"
+      data-method="GET"
+      data-path="/users/:id"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Accept&#34;:&#34;application/json&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GET-users--id', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-GET-users--id"
+            onclick="tryItOut('GET-users--id');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-GET-users--id"
+            onclick="cancelTryOut('GET-users--id');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-GET-users--id" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-green">GET</small>
+
+
+    <b><code>/users/:id</code></b>
+</p>
+
+
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+
+
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>
+
+
+
+
+    
+        <input type="number"
+               name="id"
+               data-endpoint="GET-users--id"
+               data-component="url" required hidden>
+    
+
+<br>
+<p>The ID of the user.</p>
+</p>
+
+
+
+
+</form>
+
+
+
+    
+        
+<h2 id="Users-POST-users">Create a user</h2>
+
+<p>
+
+</p>
+
+
+
+<span id="example-requests-POST-users">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/users"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request POST \
+    "http://localhost:3000/users"  \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-POST-users">
+
+</span>
+<span id="execution-results-POST-users" hidden>
+    <blockquote>Received response<span id="execution-response-status-POST-users"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POST-users"></code></pre>
+</span>
+<span id="execution-error-POST-users" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POST-users"></code></pre>
+</span>
+
+<form id="form-POST-users"
+      data-method="POST"
+      data-path="/users"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Accept&#34;:&#34;application/json&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POST-users', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-POST-users"
+            onclick="tryItOut('POST-users');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-POST-users"
+            onclick="cancelTryOut('POST-users');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-POST-users" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-black">POST</small>
+
+
+    <b><code>/users</code></b>
+</p>
+
+
+
+
+
+</form>
+
+
+
+    
+        
+<h2 id="Users-POST-users-id-auth">Authenticate</h2>
+
+<p>
+
+</p>
+
+<p>Get a new API token.</p>
+<aside>Yes, we know you can impersonate any user.🙄</aside>
+
+<span id="example-requests-POST-users--id-auth">
+<blockquote>Example request:</blockquote>
+
+
+
+<pre><code class="javascript language-javascript">const url = new URL(
+    "http://localhost:3000/users/2/auth"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+
+
+
+<pre><code class="bash language-bash">curl --request POST \
+    "http://localhost:3000/users/2/auth"  \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"
+</code></pre>
+
+
+</span>
+
+<span id="example-responses-POST-users--id-auth">
+
+
+<blockquote>Example response (200):</blockquote>
+
+
+
+<pre>
+ 
+<!-- If response is a JSON string, prettify it. Otherwise, just print it -->
+<code class="language-json">{
+    "token": "2|KLDoUXc68Ko0JaFDZoX9qYkUqWglwdGxQsvTGBCg"
+}</code>
+ </pre>
+
+
+</span>
+<span id="execution-results-POST-users--id-auth" hidden>
+    <blockquote>Received response<span id="execution-response-status-POST-users--id-auth"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POST-users--id-auth"></code></pre>
+</span>
+<span id="execution-error-POST-users--id-auth" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POST-users--id-auth"></code></pre>
+</span>
+
+<form id="form-POST-users--id-auth"
+      data-method="POST"
+      data-path="/users/:id/auth"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Accept&#34;:&#34;application/json&#34;}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POST-users--id-auth', this);">
+<h3>
+    Request&nbsp;
+    
+    <button
+            type="button"
+            style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-tryout-POST-users--id-auth"
+            onclick="tryItOut('POST-users--id-auth');">Try it out ⚡</button>
+    <button
+            type="button"
+            style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-canceltryout-POST-users--id-auth"
+            onclick="cancelTryOut('POST-users--id-auth');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button
+            type="submit"
+            style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+            id="btn-executetryout-POST-users--id-auth" hidden>Send Request 💥</button>
+    
+</h3>
+
+<p>
+    <small class="badge badge-black">POST</small>
+
+
+    <b><code>/users/:id/auth</code></b>
+</p>
+
+
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+
+
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>
+
+
+
+
+    
+        <input type="number"
+               name="id"
+               data-endpoint="POST-users--id-auth"
+               data-component="url" required hidden>
+    
+
+<br>
+<p>The ID of the user.</p>
+</p>
+
+
+
+
+</form>
+
+
+<h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+
+
+<p>
+<b><code>token</code></b>&nbsp;&nbsp;
+
+
+
+
+<br>
+<p>The new API token. Valid forever.</p>
+</p>
+
+
+
+    
+
+
+        
+    </div>
+    <div class="dark-box">
+        
+            <div class="lang-selector">
+                
+                    <a href="#" data-language-name="javascript">javascript</a>
+                
+                    <a href="#" data-language-name="bash">bash</a>
+                
+            </div>
+        
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var languages = ["javascript","bash"];
+        setupLanguages(languages);
+    });
+</script>
+
+</body>
+</html>

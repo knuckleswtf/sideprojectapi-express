@@ -8,12 +8,14 @@ class UserController {
     }
 
     static async store(req, res) {
+        // Doesn't work, btw
         let user = User.create(req.validated());
         let token = user.createToken('default');
         return {user: user, token: token.plainTextToken};
     }
 
     static async authenticate(req, res) {
+        // Also doesn't work
         let token = User.findByPk(1).createToken('default');
         return {token: token.plainTextToken};
     }

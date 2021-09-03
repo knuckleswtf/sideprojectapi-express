@@ -1,0 +1,61 @@
+name: General
+endpoints:
+  - uri: '/api/healthcheck/:unnecessaryParam?'
+    httpMethods:
+      - GET
+    metadata:
+      title: Healthcheck
+      description: >-
+        Check that the service is up. If everything is okay, you'll get a 200 OK
+        response.
+
+
+        Otherwise, the request will fail with a 400 error, and a response
+        listing the failed services.
+      authenticated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      unnecessaryParam:
+        name: unnecessaryParam
+        example: null
+        required: false
+        type: string
+        description: ''
+        match: ':unnecessaryParam?'
+    queryParameters: {}
+    bodyParameters: {}
+    responses:
+      - status: 200
+        description: ''
+        headers:
+          access-control-allow-origin: '*'
+          content-type: application/json; charset=utf-8
+        content: |-
+          {
+              "status": "up",
+              "services": {
+                  "database": "up",
+                  "redis": "up"
+              }
+          }
+      - content: |-
+          {
+              "status": "down",
+              "services": {
+                  "database": "up",
+                  "redis": "down"
+              }
+          }
+        status: 400
+        description: '400, Service is unhealthy'
+    responseFields:
+      status:
+        name: status
+        type: ''
+        description: The status of this API (`up` or `down`).
+      services:
+        name: services
+        type: ''
+        description: Map of each downstream service and their status (`up` or `down`).

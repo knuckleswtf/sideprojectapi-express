@@ -1,0 +1,648 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "localhost:3000"
+        }
+    ],
+    "info": {
+        "name": "The SideProjectAPI (Express) Documentation",
+        "description": "",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_postman_id": "41893f20-1423-4459-b599-b63659d95051"
+    },
+    "item": [
+        {
+            "name": "General",
+            "item": [
+                {
+                    "name": "Healthcheck",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api/healthcheck/:unnecessaryParam?",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/api/healthcheck/:unnecessaryParam?",
+                            "variable": [
+                                {
+                                    "id": "unnecessaryParam",
+                                    "key": "unnecessaryParam",
+                                    "value": "null",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Check that the service is up. If everything is okay, you'll get a 200 OK response.\n\nOtherwise, the request will fail with a 400 error, and a response listing the failed services.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application/json; charset=utf-8"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\n    \"status\": \"up\",\n    \"services\": {\n        \"database\": \"up\",\n        \"redis\": \"up\"\n    }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\n    \"status\": \"down\",\n    \"services\": {\n        \"database\": \"up\",\n        \"redis\": \"down\"\n    }\n}",
+                            "name": "400, Service is unhealthy"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Dummy endpoints",
+            "item": [
+                {
+                    "name": "Nested fields",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "nested",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/nested"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"name\": \"ut\",\n        \"size\": 5,\n        \"things\": {\n            \"0\": \"exercitationem\",\n            \"1\": \"quia\"\n        },\n        \"objects\": {\n            \"0\": {\n                \"a\": \"dolorem\",\n                \"b\": \"tempore\"\n            },\n            \"1\": {\n                \"a\": \"dolorem\",\n                \"b\": \"tempore\"\n            }\n        }\n    }\n}"
+                        },
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Body content array",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "array-body",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/array-body"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"0\": {\n        \"row_id\": \"700\",\n        \"name\": \"My item name\"\n    },\n    \"1\": {\n        \"row_id\": \"700\",\n        \"name\": \"My item name\"\n    }\n}"
+                        },
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "File input",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "file-input",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/file-input"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "nested",
+                                    "value": {
+                                        "_string": "maxime"
+                                    },
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "the_file",
+                                    "src": [],
+                                    "type": "file"
+                                },
+                                {
+                                    "key": "nested",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Side Projects",
+            "item": [
+                {
+                    "name": "View all side projects",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "sideProjects",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/sideProjects"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "This endpoint's response was gotten via a \"response call\"—\nScribe **called our API** in a test environment to get a sample response.\n",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application/json; charset=utf-8"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Product Group Developer\",\n        \"description\": \"Ea ea earum aspernatur recusandae eum ut et.\",\n        \"url\": null,\n        \"dueAt\": \"2021-06-19T07:02:53.289Z\",\n        \"createdAt\": \"2021-06-18T16:35:57.575Z\",\n        \"updatedAt\": \"2021-06-18T16:35:57.575Z\",\n        \"UserId\": 1\n    }\n]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Start a new side project",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "sideProjects/:id",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/sideProjects/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "057",
+                                    "description": "The ID of the side project."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "_Even though we both know you'll never finish it._\n\nThis endpoint's body parameters were automatically generated by Scribe\nfrom the controller's code. Check out the source! </aside>\n\n"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Finish a side project",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "sideProjects/:id",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/sideProjects/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "2",
+                                    "description": "The ID of the side project."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Hmmm.🤔\n",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update a side project",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "sideProjects/:id",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/sideProjects/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "95",
+                                    "description": "The ID of the side project."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "View a side project",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "sideProjects/:id",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/sideProjects/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "786",
+                                    "description": "The ID of the side project."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "The 404 sample is gotten from a \"response file\".\n\n<aside class=\"success\">Also, pretty cool: this endpoint's (and some others) URL parameters were figured out entirely by Scribe!</aside>",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application/json; charset=utf-8"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\n    \"id\": 1,\n    \"name\": \"Product Group Developer\",\n    \"description\": \"Ea ea earum aspernatur recusandae eum ut et.\",\n    \"url\": null,\n    \"dueAt\": \"2021-06-19T07:02:53.289Z\",\n    \"createdAt\": \"2021-06-18T16:35:57.575Z\",\n    \"updatedAt\": \"2021-06-18T16:35:57.575Z\",\n    \"UserId\": 1,\n    \"User\": {\n        \"id\": 1,\n        \"name\": \"Jessie Medhurst\",\n        \"email\": \"Johnathan_Purdy36@gmail.com\",\n        \"emailVerifiedAt\": \"2021-06-18T16:35:57.558Z\",\n        \"password\": \"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi\",\n        \"createdAt\": \"2021-06-18T16:35:57.560Z\",\n        \"updatedAt\": \"2021-06-18T16:35:57.560Z\"\n    }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Not found\",\n    \"resource\": \"Side project\"\n}",
+                            "name": "404, Side project not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete a side project",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "sideProjects/:id",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/sideProjects/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "232",
+                                    "description": "The ID of the side project."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "null",
+                            "name": "204, Nothing to see here"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "View all users",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "users",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/users"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "[TODO] This endpoint uses a custom Scribe strategy that parses a\n`@usesPagination` annotation to add some query parameters.\n\nThe sample response is gotten by Scribe making a test API call (aka \"response call\").",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application/json; charset=utf-8"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Jessie Medhurst\",\n            \"email\": \"Johnathan_Purdy36@gmail.com\",\n            \"emailVerifiedAt\": \"2021-06-18T16:35:57.558Z\",\n            \"password\": \"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi\",\n            \"createdAt\": \"2021-06-18T16:35:57.560Z\",\n            \"updatedAt\": \"2021-06-18T16:35:57.560Z\"\n        }\n    ]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Fetch a user",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "users/:id",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/users/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "22",
+                                    "description": "The ID of the user."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "The 404 sample is gotten from a \"response file\".",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application/json; charset=utf-8"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\n    \"dara\": {\n        \"id\": 1,\n        \"name\": \"Jessie Medhurst\",\n        \"email\": \"Johnathan_Purdy36@gmail.com\",\n        \"emailVerifiedAt\": \"2021-06-18T16:35:57.558Z\",\n        \"password\": \"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi\",\n        \"createdAt\": \"2021-06-18T16:35:57.560Z\",\n        \"updatedAt\": \"2021-06-18T16:35:57.560Z\",\n        \"SideProjects\": [\n            {\n                \"id\": 1,\n                \"name\": \"Product Group Developer\",\n                \"description\": \"Ea ea earum aspernatur recusandae eum ut et.\",\n                \"url\": null,\n                \"dueAt\": \"2021-06-19T07:02:53.289Z\",\n                \"createdAt\": \"2021-06-18T16:35:57.575Z\",\n                \"updatedAt\": \"2021-06-18T16:35:57.575Z\",\n                \"UserId\": 1\n            }\n        ]\n    }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Not found\",\n    \"resource\": \"user\"\n}",
+                            "name": "404, User not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a user",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "users",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/users"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Authenticate",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "users/:id/auth",
+                            "query": [],
+                            "raw": "http://{{baseUrl}}/users/:id/auth",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "2",
+                                    "description": "The ID of the user."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get a new API token.\n\n<aside>Yes, we know you can impersonate any user.🙄</aside>",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"token\": \"2|KLDoUXc68Ko0JaFDZoX9qYkUqWglwdGxQsvTGBCg\"\n}",
+                            "name": "200"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer"
+    }
+}
