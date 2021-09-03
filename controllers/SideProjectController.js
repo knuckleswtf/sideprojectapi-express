@@ -26,7 +26,7 @@ class SideProjectController {
     }
 
     static async show(req, res) {
-        const sideProject = await SideProject.findByPk(1); // Really should be req.params.id
+        const sideProject = await SideProject.findByPk(1, {include: 'User'}); // Really should be req.params.id
         return res.json(sideProject);
     }
 
