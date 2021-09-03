@@ -21,21 +21,21 @@ endpoints:
         required: true
         description: The data
         example:
-          name: ut
+          name: non
           size: 5
           things:
-            - exercitationem
-            - quia
+            - ex
+            - reprehenderit
           objects:
-            - a: dolorem
-              b: tempore
-            - a: dolorem
+            - a: vel
+              b: perspiciatis
+            - b: perspiciatis
       data.name:
         name: data.name
         type: string
         required: true
         description: A string field.
-        example: ut
+        example: non
       data.size:
         name: data.size
         type: integer
@@ -48,29 +48,29 @@ endpoints:
         required: false
         description: An array of strings
         example:
-          - exercitationem
-          - quia
+          - ex
+          - reprehenderit
       data.objects:
         name: data.objects
         type: 'object[]'
         required: false
         description: An array of objects
         example:
-          - a: dolorem
-            b: tempore
-          - a: dolorem
+          - a: vel
+            b: perspiciatis
+          - b: perspiciatis
       'data.objects[].a':
         name: 'data.objects[].a'
         type: string
         required: false
         description: A field in the array of objects
-        example: dolorem
+        example: vel
       'data.objects[].b':
         name: 'data.objects[].b'
         type: string
         required: false
         description: A field in the array of objects
-        example: tempore
+        example: perspiciatis
     responses: []
     responseFields: {}
   - uri: /array-body
@@ -94,8 +94,7 @@ endpoints:
         example:
           - row_id: '700'
             name: My item name
-          - row_id: '700'
-            name: My item name
+          - name: My item name
       '[].row_id':
         name: '[].row_id'
         type: string
@@ -129,28 +128,28 @@ endpoints:
         required: true
         description: Just a file.
         example:
-          ___filePath: 'C:\Users\shalvah\AppData\Local\Temp\tmp-9876-zaYF0dJvneak'
+          ___filePath: 'C:\Users\shalvah\AppData\Local\Temp\tmp-10620-Y4r6BbpT5IdM'
       nested:
         name: nested
         type: object
         required: true
         description: ''
         example:
-          _string: maxime
+          _string: est
           _file:
-            ___filePath: 'C:\Users\shalvah\AppData\Local\Temp\tmp-9876-cTiplaU9fgam'
+            ___filePath: 'C:\Users\shalvah\AppData\Local\Temp\tmp-10620-PdiZ3e24etma'
       nested._string:
         name: nested._string
         type: string
         required: true
         description: A nested string.
-        example: maxime
+        example: est
       nested._file:
         name: nested._file
         type: file
         required: true
         description: A nested file.
         example:
-          ___filePath: 'C:\Users\shalvah\AppData\Local\Temp\tmp-9876-cTiplaU9fgam'
+          ___filePath: 'C:\Users\shalvah\AppData\Local\Temp\tmp-10620-PdiZ3e24etma'
     responses: []
     responseFields: {}

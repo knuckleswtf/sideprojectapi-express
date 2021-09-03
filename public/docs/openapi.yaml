@@ -85,21 +85,21 @@ paths:
                   type: object
                   description: The data
                   example:
-                    name: ut
+                    name: non
                     size: 5
                     things:
-                      - exercitationem
-                      - quia
+                      - ex
+                      - reprehenderit
                     objects:
-                      - a: dolorem
-                        b: tempore
-                      - a: dolorem
-                        b: tempore
+                      - a: vel
+                        b: perspiciatis
+                      - b: perspiciatis
+                        a: vel
                   properties:
                     name:
                       type: string
                       description: A string field.
-                      example: ut
+                      example: non
                     size:
                       type: integer
                       description: A number.
@@ -108,29 +108,29 @@ paths:
                       type: array
                       description: An array of strings
                       example:
-                        - exercitationem
-                        - quia
+                        - ex
+                        - reprehenderit
                       items:
                         type: string
                     objects:
                       type: array
                       description: An array of objects
                       example:
-                        - a: dolorem
-                          b: tempore
-                        - a: dolorem
-                          b: tempore
+                        - a: vel
+                          b: perspiciatis
+                        - b: perspiciatis
+                          a: vel
                       items:
                         type: object
                         properties:
                           a:
                             type: string
                             description: A field in the array of objects
-                            example: dolorem
+                            example: vel
                           b:
                             type: string
                             description: A field in the array of objects
-                            example: tempore
+                            example: perspiciatis
               required:
                 - data
         required: true
@@ -163,8 +163,8 @@ paths:
               example:
                 - row_id: '700'
                   name: My item name
-                - row_id: '700'
-                  name: My item name
+                - name: My item name
+                  row_id: '700'
               items:
                 type: object
                 properties:
@@ -213,15 +213,15 @@ paths:
                   type: object
                   description: ''
                   example:
-                    _string: maxime
+                    _string: est
                     _file:
                       ___filePath: >-
-                        C:\Users\shalvah\AppData\Local\Temp\tmp-9876-cTiplaU9fgam
+                        C:\Users\shalvah\AppData\Local\Temp\tmp-10620-PdiZ3e24etma
                   properties:
                     _string:
                       type: string
                       description: A nested string.
-                      example: maxime
+                      example: est
                     _file:
                       type: string
                       format: binary

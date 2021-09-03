@@ -56,10 +56,10 @@ endpoints:
     urlParameters:
       id:
         name: id
-        example: '22'
+        example: '05'
         required: true
         description: The ID of the user.
-        type: integer
+        type: string
         match: ':id(\d+)'
         placeholder: ':id'
     queryParameters: {}
@@ -130,7 +130,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        example: '2'
+        example: '3'
         required: true
         description: The ID of the user.
         type: integer

@@ -313,20 +313,20 @@ const headers = {
 
 const body = {
     "data": {
-        "name": "ut",
+        "name": "non",
         "size": 5,
         "things": {
-            "0": "exercitationem",
-            "1": "quia"
+            "0": "ex",
+            "1": "reprehenderit"
         },
         "objects": {
             "0": {
-                "a": "dolorem",
-                "b": "tempore"
+                "a": "vel",
+                "b": "perspiciatis"
             },
             "1": {
-                "a": "dolorem",
-                "b": "tempore"
+                "b": "perspiciatis",
+                "a": "vel"
             }
         }
     }
@@ -349,20 +349,20 @@ fetch(url, {
     --header "Accept: application/json" \
     --data '{
     "data": {
-        "name": "ut",
+        "name": "non",
         "size": 5,
         "things": {
-            "0": "exercitationem",
-            "1": "quia"
+            "0": "ex",
+            "1": "reprehenderit"
         },
         "objects": {
             "0": {
-                "a": "dolorem",
-                "b": "tempore"
+                "a": "vel",
+                "b": "perspiciatis"
             },
             "1": {
-                "a": "dolorem",
-                "b": "tempore"
+                "b": "perspiciatis",
+                "a": "vel"
             }
         }
     }
@@ -608,8 +608,8 @@ const body = {
         "name": "My item name"
     },
     "1": {
-        "row_id": "700",
-        "name": "My item name"
+        "name": "My item name",
+        "row_id": "700"
     }
 }
 
@@ -634,8 +634,8 @@ fetch(url, {
         "name": "My item name"
     },
     "1": {
-        "row_id": "700",
-        "name": "My item name"
+        "name": "My item name",
+        "row_id": "700"
     }
 }'
 </code></pre>
@@ -776,7 +776,7 @@ const headers = {
 };
 
 const body = new FormData();
-body.append('nested[_string]', 'maxime');
+body.append('nested[_string]', 'est');
 body.append('the_file', document.querySelector('input[name="the_file"]').files[0]);
 body.append('nested[_file]', document.querySelector('input[name="nested[_file]"]').files[0]);
 
@@ -795,9 +795,9 @@ fetch(url, {
     "http://localhost:3000/file-input"  \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
-    --form "nested[_string]=maxime" \
-    --form "the_file=@C:\Users\shalvah\AppData\Local\Temp\tmp-9876-zaYF0dJvneak" \
-    --form "nested[_file]=@C:\Users\shalvah\AppData\Local\Temp\tmp-9876-cTiplaU9fgam"
+    --form "nested[_string]=est" \
+    --form "the_file=@C:\Users\shalvah\AppData\Local\Temp\tmp-10620-Y4r6BbpT5IdM" \
+    --form "nested[_file]=@C:\Users\shalvah\AppData\Local\Temp\tmp-10620-PdiZ3e24etma"
 </code></pre>
 
 
@@ -1099,7 +1099,7 @@ from the controller's code. Check out the source! </aside></p>
 
 
 <pre><code class="javascript language-javascript">const url = new URL(
-    "http://localhost:3000/sideProjects/057"
+    "http://localhost:3000/sideProjects/7"
 );
 
 const headers = {
@@ -1120,7 +1120,7 @@ fetch(url, {
 
 
 <pre><code class="bash language-bash">curl --request POST \
-    "http://localhost:3000/sideProjects/057"  \
+    "http://localhost:3000/sideProjects/7"  \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Authorization: Bearer {BEARER_TOKEN}"
@@ -1192,13 +1192,13 @@ fetch(url, {
 
 
 <p>
-<b><code>id</code></b>&nbsp;&nbsp;<small>string</small>
+<b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>
 
 
 
 
     
-        <input type="text"
+        <input type="number"
                name="id"
                data-endpoint="POST-sideProjects--id"
                data-component="url" required hidden>
@@ -1231,7 +1231,7 @@ fetch(url, {
 
 
 <pre><code class="javascript language-javascript">const url = new URL(
-    "http://localhost:3000/sideProjects/2"
+    "http://localhost:3000/sideProjects/7"
 );
 
 const headers = {
@@ -1251,7 +1251,7 @@ fetch(url, {
 
 
 <pre><code class="bash language-bash">curl --request POST \
-    "http://localhost:3000/sideProjects/2"  \
+    "http://localhost:3000/sideProjects/7"  \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"
 </code></pre>
@@ -1352,7 +1352,7 @@ fetch(url, {
 
 
 <pre><code class="javascript language-javascript">const url = new URL(
-    "http://localhost:3000/sideProjects/95"
+    "http://localhost:3000/sideProjects/54"
 );
 
 const headers = {
@@ -1372,7 +1372,7 @@ fetch(url, {
 
 
 <pre><code class="bash language-bash">curl --request POST \
-    "http://localhost:3000/sideProjects/95"  \
+    "http://localhost:3000/sideProjects/54"  \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"
 </code></pre>
@@ -1474,7 +1474,7 @@ fetch(url, {
 
 
 <pre><code class="javascript language-javascript">const url = new URL(
-    "http://localhost:3000/sideProjects/786"
+    "http://localhost:3000/sideProjects/22"
 );
 
 const headers = {
@@ -1494,7 +1494,7 @@ fetch(url, {
 
 
 <pre><code class="bash language-bash">curl --request GET \
-    --get "http://localhost:3000/sideProjects/786"  \
+    --get "http://localhost:3000/sideProjects/22"  \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"
 </code></pre>
@@ -1646,7 +1646,7 @@ content-type: application/json; charset=utf-8 </code></pre>
 
 
 <pre><code class="javascript language-javascript">const url = new URL(
-    "http://localhost:3000/sideProjects/232"
+    "http://localhost:3000/sideProjects/070"
 );
 
 const headers = {
@@ -1666,7 +1666,7 @@ fetch(url, {
 
 
 <pre><code class="bash language-bash">curl --request DELETE \
-    "http://localhost:3000/sideProjects/232"  \
+    "http://localhost:3000/sideProjects/070"  \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"
 </code></pre>
@@ -1739,13 +1739,13 @@ fetch(url, {
 
 
 <p>
-<b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>
+<b><code>id</code></b>&nbsp;&nbsp;<small>string</small>
 
 
 
 
     
-        <input type="number"
+        <input type="text"
                name="id"
                data-endpoint="DELETE-sideProjects--id"
                data-component="url" required hidden>
@@ -1919,7 +1919,7 @@ content-type: application/json; charset=utf-8 </code></pre>
 
 
 <pre><code class="javascript language-javascript">const url = new URL(
-    "http://localhost:3000/users/22"
+    "http://localhost:3000/users/05"
 );
 
 const headers = {
@@ -1939,7 +1939,7 @@ fetch(url, {
 
 
 <pre><code class="bash language-bash">curl --request GET \
-    --get "http://localhost:3000/users/22"  \
+    --get "http://localhost:3000/users/05"  \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"
 </code></pre>
@@ -2056,13 +2056,13 @@ content-type: application/json; charset=utf-8 </code></pre>
 
 
 <p>
-<b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>
+<b><code>id</code></b>&nbsp;&nbsp;<small>string</small>
 
 
 
 
     
-        <input type="number"
+        <input type="text"
                name="id"
                data-endpoint="GET-users--id"
                data-component="url" required hidden>
@@ -2196,7 +2196,7 @@ fetch(url, {
 
 
 <pre><code class="javascript language-javascript">const url = new URL(
-    "http://localhost:3000/users/2/auth"
+    "http://localhost:3000/users/3/auth"
 );
 
 const headers = {
@@ -2216,7 +2216,7 @@ fetch(url, {
 
 
 <pre><code class="bash language-bash">curl --request POST \
-    "http://localhost:3000/users/2/auth"  \
+    "http://localhost:3000/users/3/auth"  \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"
 </code></pre>

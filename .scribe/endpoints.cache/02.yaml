@@ -58,10 +58,10 @@ endpoints:
     urlParameters:
       id:
         name: id
-        example: '057'
+        example: '7'
         required: true
         description: The ID of the side project.
-        type: string
+        type: integer
         match: ':id(\d+)'
         placeholder: ':id'
     queryParameters: {}
@@ -81,7 +81,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        example: '2'
+        example: '7'
         required: true
         description: The ID of the side project.
         type: integer
@@ -104,7 +104,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        example: '95'
+        example: '54'
         required: true
         description: The ID of the side project.
         type: integer
@@ -132,7 +132,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        example: '786'
+        example: '22'
         required: true
         description: The ID of the side project.
         type: integer
@@ -187,10 +187,10 @@ endpoints:
     urlParameters:
       id:
         name: id
-        example: '232'
+        example: '070'
         required: true
         description: The ID of the side project.
-        type: integer
+        type: string
         match: ':id(\d+)'
         placeholder: ':id'
     queryParameters: {}
